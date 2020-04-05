@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  mongodb:
+    image: bitnami/mongodb:latest
+    ports: [
+      "27017:27017"
+    ]
+    volumes:
+      - /data/db:/data/db
+    environment:
+      - MONGODB_USER=felipe
+      - MONGODB_PASSWORD=folR272812
+      - MONGODB_DATABASE=fulltime
+      - MONGODB_ROOT_PASSWORD=folR272812
+
+  web:
+    build: .
+    volumes:
+      - ./:/app
+    ports: [
+      "3000:3000"
+    ]
+    depends_on:
+      - mongodb
